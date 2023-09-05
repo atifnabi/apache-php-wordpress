@@ -1,0 +1,10 @@
+FROM php:7.4-apache
+# Install WordPress
+RUN curl -O https://wordpress.org/latest.tar.gz
+RUN tar -xzf latest.tar.gz
+RUN mv wordpress/* /var/www/html
+# Configure Apache
+RUN a2enmod rewrite
+RUN echo "ServerName localhost" > /etc/apache2/sites-available/000-default.conf
+# Start Apache
+CMD ["apache2-foreground"]
